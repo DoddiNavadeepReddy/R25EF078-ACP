@@ -1,1 +1,155 @@
+MINI PROJECT: 2D GRAPHICS EDITOR USING C
 
+
+PROMPT 1
+
+Create a mini project in C that simulates a simple 2D graphics editor in the terminal. The program should use a character matrix as a canvas and allow users to draw basic shapes such as lines, rectangles, circles, and triangles.
+
+RESPONSE
+Suggested approach:
+- Create a 2D array to represent the drawing canvas.
+- Use characters such as '*' for drawing and '_' for empty spaces.
+- Implement functions:
+  1. drawLine()
+  2. drawRectangle()
+  3. drawCircle()
+  4. drawTriangle()
+- Display the canvas after drawing.
+- Use a menu-driven interface for user interaction.
+
+PROMPT 2
+How can I create a drawing canvas in C using a two-dimensional character array?
+Use a global character array:
+
+#define WIDTH 80
+#define HEIGHT 24
+
+char picture[HEIGHT][WIDTH];
+
+Initialize the canvas using nested loops and fill every cell with an empty character such as '_'.
+
+PROMPT 3
+Generate a function to clear and initialize the drawing canvas.
+
+A clearPicture() function can be created that traverses every row and column of the canvas and assigns an empty character to each location.
+
+Example:
+for each row
+    for each column
+        picture[row][column] = '_';
+
+PROMPT 4
+How can I display the contents of the canvas on the terminal?
+Create a displayPicture() function that prints every element of the matrix using nested loops. After each row, print a newline character to properly format the output.
+
+PROMPT 5
+Generate a safe pixel drawing function for a graphics editor.
+Create a function named setPixel(x,y).
+
+Before drawing:
+- Check x is between 0 and WIDTH-1.
+- Check y is between 0 and HEIGHT-1.
+
+If coordinates are valid:
+picture[y][x] = '*';
+
+This prevents out-of-bound memory access.
+
+PROMPT 6
+How can I draw a straight line between two points in C without graphics libraries?
+Use the Digital Differential Analyzer (DDA) line drawing algorithm.
+
+Steps:
+1. Calculate dx and dy.
+2. Determine number of steps.
+3. Compute x increment and y increment.
+4. Plot points using setPixel().
+
+This method works well for terminal-based graphics projects.
+
+PROMPT 7
+Generate a rectangle drawing function using the line drawing function.
+A rectangle can be created by drawing four lines:
+- Top edge
+- Bottom edge
+- Left edge
+- Right edge
+
+Reuse drawLine() to avoid code duplication.
+
+PROMPT 8
+How can I draw a circle on a character-based canvas?
+Use the mathematical circle equation:
+
+(x - cx)^2 + (y - cy)^2 = r^2
+
+For every pixel in the canvas:
+- Compute distance from center.
+- If the distance is close to the radius, plot the pixel.
+
+This creates an approximate circular boundary.
+
+PROMPT 9
+Generate a triangle drawing function.
+A triangle can be drawn by connecting three vertices using three lines:
+
+drawLine(x1,y1,x2,y2);
+drawLine(x2,y2,x3,y3);
+drawLine(x3,y3,x1,y1);
+
+PROMPT 10
+Create a menu-driven interface for the 2D graphics editor.
+Suggested menu:
+
+1. Draw Line
+2. Draw Rectangle
+3. Draw Circle
+4. Draw Triangle
+5. Display Picture
+0. Exit
+
+Use a loop that continues until the user selects Exit.
+
+PROMPT 11
+How can I prevent program crashes when the user enters invalid input?
+
+Use scanf() return value checking.
+
+Example:
+if(scanf("%d",&choice) != 1)
+
+If invalid:
+- Display an error message.
+- Clear the input buffer.
+- Continue execution.
+
+This improves program reliability.
+
+PROMPT 12
+Generate a function to clear the input buffer after invalid keyboard input.
+void clearInputBuffer()
+{
+    int c;
+    while((c=getchar())!='\n' && c!=EOF);
+}
+
+This removes leftover characters and prevents infinite input loops.
+
+PROMPT 13
+Review my complete 2D Graphics Editor program and suggest improvements.
+
+Suggested improvements:
+1. Add shape filling functionality.
+2. Add color support using ANSI escape codes.
+3. Add save/load canvas feature.
+4. Add erase tool.
+5. Add multiple drawing characters.
+6. Improve circle accuracy.
+7. Implement undo and redo operations.
+
+Current project successfully demonstrates:
+- Arrays
+- Functions
+- Menu-driven programming
+- Input validation
+- Basic computer graphics concepts
